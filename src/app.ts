@@ -16,10 +16,10 @@ app.use(
 );
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/api/health",(req,res)=>{
   res.json({
-    success: true,
-    message: "CareerTrack Lite API is running 🚀",
+    success:true,
+    message:"API healthy 🚀"
   });
 });
 app.use("/api", authRoutes);
