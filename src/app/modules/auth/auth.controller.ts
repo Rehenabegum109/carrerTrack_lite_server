@@ -15,8 +15,8 @@ export const register = async (
       result.accessToken,
       {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: true,
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       }
     );
@@ -53,11 +53,11 @@ export const login = async (req : Request, res: Response) => {
 
    res.cookie("accessToken", result.accessToken, {
       httpOnly: true,
-      secure: false, 
-      sameSite: "lax",
+      secure: true, 
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-console.log(res.getHeaders());
+
     res.status(200).json({
       success: true,
       message: "Login successful",
@@ -76,7 +76,9 @@ console.log(res.getHeaders());
 export const getMe = async (req: Request, res: Response) => {
   try {
     const user = (req as any).user;
+
     const result = await getMeService(user.id);
+
     res.status(200).json({
       success: true,
       message: "User retrieved successfully",
@@ -89,17 +91,16 @@ export const getMe = async (req: Request, res: Response) => {
     });
   }
 };
-
 export const logout = async (
   req: Request,
   res: Response
 ) => {
 
   res.clearCookie("accessToken", {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-  });
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+});
 
 
   res.status(200).json({
