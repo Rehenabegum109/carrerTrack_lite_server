@@ -25,10 +25,21 @@ export const registerUser = async (payload: IRegisterUser) => {
     },
   });
 
-  return {
+
+  const accessToken = generateToken({
     id: user.id,
-    name: user.name,
     email: user.email,
+  });
+
+
+  return {
+    accessToken,
+
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    },
   };
 };
 

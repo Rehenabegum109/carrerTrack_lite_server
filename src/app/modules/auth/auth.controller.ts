@@ -5,7 +5,6 @@ export const register = async (
   req: Request,
   res: Response
 ) => {
-
   try {
 
     const result = await registerUser(req.body);
@@ -18,17 +17,16 @@ export const register = async (
         httpOnly: true,
         secure: false,
         sameSite: "lax",
-        maxAge:
-          7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       }
     );
 
 
     res.status(201).json({
 
-      success:true,
+      success: true,
 
-      message:"User registered successfully",
+      message: "User registered successfully",
 
       data: result.user,
 
@@ -46,9 +44,7 @@ export const register = async (
     });
 
   }
-
 };
-
 
 
 export const login = async (req : Request, res: Response) => {
